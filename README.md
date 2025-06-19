@@ -1,125 +1,80 @@
-⏰ ClockMate
+# ClockMate
 
-ClockMate is a time-tracking web application designed to help businesses and employees manage clock-in/clock-out sessions efficiently. Built with a Spring Boot backend and a React + Tailwind CSS frontend, ClockMate supports session tracking, timesheet reporting, and employee management.
+ClockMate is a time-tracking web application designed to help individuals and businesses manage attendance efficiently. It offers features like clock in/out, session history, attendance logs, and data export to Excel.
 
-🚀 Features
+## Features
 
-Clock-in and clock-out system per user
+- ✅ **User Clock In/Out**: Track start and end times of work sessions.
+- 📅 **Session History**: View detailed session data with timestamps.
+- ⏱️ **Duration Calculation**: Automatically calculates total hours and minutes per session.
+- 📤 **Excel Export**: Export attendance records between specific dates.
+- 🌐 **Responsive UI**: Built using React and Tailwind CSS for a modern, user-friendly experience.
+- 🔐 **Login/Register (WIP)**: Planned authentication features for user access control.
 
-View complete attendance history
+## Tech Stack
 
-Calculate total working hours and session duration
+### Frontend
+- **React 19**
+- **Tailwind CSS**
+- **React Router DOM**
+- **Material UI**
 
-Export session data to Excel
+### Backend
+- **Spring Boot 3**
+- **Java 21**
+- **JPA (Hibernate)**
+- **H2 / PostgreSQL** (configurable)
 
-Modern responsive UI with Tailwind CSS
+## Setup Instructions
 
-Material UI integration for rich UI components
-
-💠 Tech Stack
-
-Backend
-
-Java 21 + Spring Boot
-
-Spring Web, Spring Data JPA
-
-PostgreSQL (or H2 for local testing)
-
-Maven
-
-Frontend
-
-React 19
-
-Tailwind CSS
-
-Material UI
-
-Vite
-
-🧪 Running the Project
-
-Backend
-
+### Backend (Spring Boot)
+```bash
+# Navigate to backend directory
 cd backend
+
+# Build and run the app (e.g. via IntelliJ or CLI)
 ./mvnw spring-boot:run
+```
 
-Frontend
-
+### Frontend (React)
+```bash
+# Navigate to frontend directory
 cd frontend
+
+# Install dependencies
 npm install
+
+# Start development server
 npm run dev
+```
 
-📋 Folder Structure
+## API Endpoints (Sample)
 
-/clockmate
+- `POST /clockin/{userId}` – Clock in a user
+- `POST /clockout/{userId}` – Clock out a user
+- `GET /{userId}/sessions` – Get all sessions
+- `GET /status/{userId}` – Get user's current clock-in/clock-out status
+- `GET /export?from={date}&to={date}` – Export Excel for given date range
+
+## Folder Structure
+
+```
+ClockMate/
 ├── backend/
-│   └── src/main/java/com/clockmate/...
+│   ├── model/
+│   ├── controller/
+│   ├── repository/
+│   └── service/
 ├── frontend/
-│   └── src/
-│       └── components/
-│       └── pages/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── assets/
+│   │   ├── App.jsx
+│   │   └── index.css
+```
 
-📋 API Endpoints
+## Credits
+- Developed by [Huzefa Taher Saleem](https://github.com/huzefa897)
 
-Method
-
-Endpoint
-
-Description
-
-POST
-
-/api/clock-in
-
-Clock in a user
-
-POST
-
-/api/clock-out
-
-Clock out a user
-
-GET
-
-/api/{userId}/sessions
-
-Get session list for a user
-
-GET
-
-/api/{userId}/status
-
-Check current clock-in status
-
-GET
-
-/api/export/excel
-
-Export all sessions to Excel
-
-📦 Deployment
-
-You can deploy ClockMate using:
-
-Render / Railway / Fly.io for backend
-
-Vercel / Netlify for frontend
-
-🙌 Contributing
-
-Open to improvements and bug fixes! Create an issue or fork the repo and make a PR.
-
-🌐 Additional Info
-
-Environment Variables (Sample)
-
-SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/clockmate
-SPRING_DATASOURCE_USERNAME=your_username
-SPRING_DATASOURCE_PASSWORD=your_password
-
-License
-
-MIT License — Feel free to use, modify, and share.
-
+## License
+This project is licensed under the MIT License.
