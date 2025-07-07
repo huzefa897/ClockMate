@@ -13,7 +13,6 @@ function Navbar() {
       {/* Navigation links */}
       <div className="text-[15px] font-bold text-[#B2A6AB] flex items-center space-x-8 text-gray-700 text-sm">
         <Link to="/" className="hover:underline px-20 text-[#DAB2B3]">Home</Link>
-        <Link to="/register" className="hover:underline px-20">Register</Link>
         <Link to="/dashboard" className="hover:underline px-20">Dashboard</Link>
 
          <a href="https://pearldentalcare.com.au/about-us/" className="hover:underline px-20" >About Us</a>

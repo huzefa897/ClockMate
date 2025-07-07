@@ -1,28 +1,50 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const RegisterForm = () => {
   const [name, setName] = useState('');
   const [pin, setPin] = useState('');
+  const [error, setError] = useState('');
+  const [status, setStaus] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // <-- this prevents the default form submit
 
-    const res = await fetch('/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({ name, pin }),
-    });
+    if (!pin) {
+      setError("Pin is required");
+      return;
+    }
 
-    const result = await res.text();
-    alert(result);
+    try {
+      const formData = new URLSearchParams();
+      formData.append('name', name);
+      formData.append('pin', pin);
+
+      const response = await axios.post('http://localhost:8080/Register', formData, {
+        headers: {
+          "Content-Type": 'application/x-www-form-urlencoded',
+        },
+      });
+
+      alert(response.data);
+      console.log(response.data);
+      setError('');
+      setStaus(`✅ ${status}`);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      setError('Registration Failed');
+    }
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form
-        onSubmit={handleSubmit}
         className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm"
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
@@ -46,13 +68,14 @@ const RegisterForm = () => {
             value={pin}
             onChange={(e) => setPin(e.target.value)}
             required
-            min="1000"
-            max="9999"
+
           />
         </label>
-
+        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {status && <p className="text-green-600 mt-2">{status}</p>}
         <button
           type="submit"
+          onClick={handleSubmit}
           className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
         >
           Register
